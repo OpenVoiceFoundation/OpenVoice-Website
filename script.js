@@ -88,7 +88,7 @@ function handleSubmit(event) {
   var formData = new FormData(event.target);
 
   // Send the form data via EmailJS
-  emailjs.sendForm('your_service_id', 'your_template_id', formData)
+  emailjs.sendForm('service_jum20ja', 'template_4unn1ck', formData)
     .then(function(response) {
       alert("Thank you for contacting us! We'll get back to you shortly.");
     }, function(error) {
