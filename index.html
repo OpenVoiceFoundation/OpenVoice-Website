@@ -9,17 +9,52 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script defer src="script.js"></script>
   <style>
     body {
       font-family: 'Roboto', sans-serif;
+      scroll-behavior: smooth;
     }
-
+  
     #termsModal.hidden {
       display: none !important;
     }
-
+  
+    .glow-button {
+      box-shadow: 0 0 10px #7c3aed, 0 0 20px #7c3aed, 0 0 30px #7c3aed;
+    }
+  
+    .glow-button:hover {
+      box-shadow: 0 0 15px #8b5cf6, 0 0 25px #8b5cf6;
+    }
+  
+    section {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+  
+    h2 {
+      text-shadow: 1px 1px 3px rgba(124, 58, 237, 0.5);
+    }
+  
+    table th, table td {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  
+    .shadow-md {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    }
+  
+    .shadow-xl {
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    }
+  
+    .shadow-2xl {
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+    }
   </style>
+  
 </head>
 <body class="bg-gray-900 text-white transition-colors duration-500">
 
@@ -45,22 +80,42 @@
   </header>
 
   <!-- Main -->
-  <main class="container mx-auto py-20 px-6 space-y-24">
-    <!-- Mission -->
-    <section>
-      <h2 class="text-4xl font-bold text-violet-300 mb-10">Our Mission</h2>
-      <p class="text-lg mb-6">At OpenVoice Foundation, our mission is to break the communication barriers between the deaf and hearing communities by creating innovative solutions that empower the deaf to express themselves and be heard.</p>
-      
-      <h3 class="text-3xl font-bold text-violet-300 mb-6">Device and R&D Update</h3>
-      <div class="max-w-sm mx-auto">
-        <canvas id="progressChart"></canvas>
-      </div>
 
-      <h3 class="text-3xl font-bold text-violet-300 mt-16 mb-6">Cost Breakdown per Device</h3>
-      <div class="max-w-sm mx-auto">
-        <canvas id="costChart"></canvas>
+<!-- Device and R&D Charts -->
+<section class="container mx-auto px-6 py-20">
+  <div class="bg-gray-900 border border-violet-800 rounded-2xl p-8 shadow-xl">
+    <section>
+      <h2 class="text-4xl font-bold text-violet-300 mb-10">Device Progress and Cost Overview</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- R&D Progress -->
+        <div class="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold text-violet-200 mb-4">R&D Completion</h3>
+          <canvas id="progressChart" class="w-full max-h-72"></canvas>
+        </div>
+
+        <!-- Cost Breakdown -->
+        <div class="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold text-violet-200 mb-4">Cost Breakdown per Device</h3>
+          <canvas id="cost" class="w-full max-h-72"></canvas>
+        </div>
+
+        <!-- Distribution Progress -->
+        <div class="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold text-violet-200 mb-4">Device Distribution</h3>
+          <canvas id="distributionChart" class="w-full max-h-72"></canvas>
+        </div>
+
+        <!-- Production Goal -->
+        <div class="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold text-violet-200 mb-4">Production Goal vs Actual</h3>
+          <canvas id="productionChart" class="w-full max-h-72"></canvas>
+        </div>
       </div>
     </section>
+  </div>
+</section>
+
 
     <!-- Features -->
     <section>
@@ -81,14 +136,86 @@
       </div>
     </section>
 
-    <!-- Call to Action -->
+    <!-- Distribution -->
     <section>
-      <h2 class="text-4xl font-bold text-violet-300 mb-10">Join Our Movement</h2>
-      <p class="text-lg mb-4">If you know FSL, help us collect training data and become a part of this revolution.</p>
-      <a href="https://forms.gle/your-contributor-form-link" target="_blank" class="bg-violet-800 hover:bg-violet-700 text-white font-bold py-3 px-6 rounded-lg border border-violet-500 shadow-lg transition duration-300 inline-block glow-button">
-      Become a Contributor
-      </a>
+      <h2 class="text-4xl font-bold text-violet-300 mb-10">Distribution Strategy</h2>
+      <p class="text-lg mb-6">Our distribution strategy is centered around making the assistive devices accessible to every individual in need. We aim to partner with local government units (LGUs), Special Education (SPED) schools, and communities to identify and support deaf individuals across the Philippines. By working closely with local organizations and government agencies, we will ensure that each device reaches the hands of those who need it the most.</p>
+      <p class="text-lg mb-6">We plan to distribute the devices for free to individuals, ensuring that cost is not a barrier to communication. Additionally, our focus will be on building a robust network of volunteers and contributors who can help us with the logistics of delivery and setup, especially in rural and remote areas.</p>
+      <p class="text-lg mb-6">Our distribution efforts will also include educational campaigns, where we will provide training and support for the users of our devices, ensuring they know how to maximize its potential. In this way, we aim to foster a culture of inclusivity where both deaf and hearing individuals can communicate effortlessly, enhancing mutual understanding and cooperation.</p>
+      <p class="text-lg mb-6">With your support, we will continue to expand our reach, ensuring that no one is left behind in our quest for accessible communication solutions for all.</p>
     </section>
+     
+    <!-- Problems Section -->
+<section>
+  <h2 class="text-4xl font-bold text-violet-300 mb-10">Current Challenges</h2>
+  
+  <p class="text-lg mb-6">As we work towards empowering the deaf community, we face several challenges that need attention. Some of the key issues include:</p>
+
+  <!-- Table for Listing Problems -->
+  <div class="overflow-x-auto bg-gray-800 p-6 rounded-xl shadow-md">
+    <table class="min-w-full table-auto text-left text-white">
+      <thead>
+        <tr>
+          <th class="py-3 px-6 font-semibold text-violet-200">Problem</th>
+          <th class="py-3 px-6 font-semibold text-violet-200">Description</th>
+          <th class="py-3 px-6 font-semibold text-violet-200">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="py-4 px-6">Lack of FSL Datasets</td>
+          <td class="py-4 px-6">There is a need for comprehensive Filipino Sign Language datasets to improve the accuracy of our translation models.</td>
+          <td class="py-4 px-6 text-yellow-500">Ongoing</td>
+        </tr>
+        <tr>
+          <td class="py-4 px-6">Limited Resources</td>
+          <td class="py-4 px-6">Despite our commitment, we are facing financial constraints to scale the project further.</td>
+          <td class="py-4 px-6 text-red-500">Critical</td>
+        </tr>
+        <tr>
+          <td class="py-4 px-6">Device Distribution Delay</td>
+          <td class="py-4 px-6">Shipping and logistics issues have delayed the timely distribution of devices to remote regions.</td>
+          <td class="py-4 px-6 text-orange-500">In Progress</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+    
+    <!-- Become a Contributor Section -->
+<section>
+  <h2 class="text-4xl font-bold text-violet-300 mb-10">Become a Contributor</h2>
+  
+  <!-- Heartfelt Introduction -->
+  <p class="text-lg mb-6">At OpenVoice Foundation, we believe in the power of community. When you contribute, you're not just helping build a product — you're helping build a bridge between worlds. A bridge where the deaf and hearing communities can finally understand one another, share stories, laugh, and connect.</p>
+
+  <!-- Why Contribute Section -->
+  <h3 class="text-3xl font-semibold text-violet-300 mb-6">Why Your Contribution Matters</h3>
+  <p class="text-lg mb-6">The impact you make goes far beyond just data or technology. You are part of something much greater — a movement that empowers individuals who have long been left unheard. With every gesture you help capture, every line of code you help develop, you are changing lives. Together, we can create a world where every voice matters, where no one is left behind.</p>
+
+  <!-- Personal Connection -->
+  <h3 class="text-3xl font-semibold text-violet-300 mb-6">Be a Voice for the Silent</h3>
+  <p class="text-lg mb-6">Imagine a world where every person, regardless of their hearing ability, can speak and be understood — where every gesture, every word, is seen and heard. By contributing, you become a voice for those who have long been silenced by the inability to communicate. Your involvement, no matter how big or small, is a step towards making that world a reality.</p>
+
+  <!-- Simple Steps to Get Involved -->
+  <h3 class="text-3xl font-semibold text-violet-300 mb-6">How You Can Make a Difference</h3>
+  <p class="text-lg mb-6">We believe that everyone can contribute in their own unique way. Whether it's collecting data, offering feedback, helping us test new features, or simply spreading the word, every contribution brings us closer to a more inclusive future. And no effort is too small. Together, we can create a ripple effect of change that will spread far and wide.</p>
+
+  <ul class="list-decimal list-inside space-y-2 text-lg mb-6">
+    <li>Help us capture sign language data, enabling a more accurate and meaningful communication tool.</li>
+    <li>Test our technology and provide feedback to ensure it meets the needs of the deaf community.</li>
+    <li>Spread the word and raise awareness about the power of inclusive communication.</li>
+  </ul>
+
+  <!-- Emotional Call to Action -->
+  <h3 class="text-3xl font-semibold text-violet-300 mb-6">Join Us and Be Part of Something Bigger</h3>
+  <p class="text-lg mb-6">This isn’t just about technology — it’s about changing lives. When you join us, you join a family of passionate individuals who believe in the power of inclusion, understanding, and respect. Together, we can create a world where every person can communicate freely, without barriers, without fear, and without hesitation.</p>
+
+  <a href="https://forms.gle/your-contributor-form-link" target="_blank" class="bg-violet-800 hover:bg-violet-700 text-white font-bold py-3 px-6 rounded-lg border border-violet-500 shadow-lg transition duration-300 inline-block glow-button">
+    Start Making a Difference Today
+  </a>
+</section>
+
 
     <!-- Contact -->
     <section id="contact">
@@ -105,23 +232,66 @@
     </section>
   </main>
 
+<!-- About Our Company Section -->
+<section class="bg-gray-900 text-white py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-extrabold text-violet-300 tracking-tight mb-4">
+        Empowering Innovation, Driving Impact
+      </h2>
+      <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+        We are a forward-thinking technology company dedicated to building smart, scalable solutions across robotics, automation, and AI—while actively supporting social impact through the OpenVoice Foundation.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gray-800 border border-violet-500 rounded-lg p-6 shadow-md hover:shadow-violet-500/30 transition">
+        <h3 class="text-2xl font-semibold text-violet-400 mb-3">Robotics & ROS</h3>
+        <p class="text-gray-300">
+          We engineer intelligent robotic platforms powered by the Robot Operating System (ROS), tailored for research, automation, and industrial deployment.
+        </p>
+      </div>
+      <div class="bg-gray-800 border border-violet-500 rounded-lg p-6 shadow-md hover:shadow-violet-500/30 transition">
+        <h3 class="text-2xl font-semibold text-violet-400 mb-3">Software & Automation</h3>
+        <p class="text-gray-300">
+          From enterprise-grade software to embedded automation tools like the Contactless Biometric Smart System (CBSS), we deliver innovation that scales.
+        </p>
+      </div>
+      <div class="bg-gray-800 border border-violet-500 rounded-lg p-6 shadow-md hover:shadow-violet-500/30 transition">
+        <h3 class="text-2xl font-semibold text-violet-400 mb-3">AI & Machine Learning</h3>
+        <p class="text-gray-300">
+          We build intelligent systems that learn and adapt—enabling smarter, faster decision-making for businesses and communities.
+        </p>
+      </div>
+      <div class="bg-gray-800 border border-violet-500 rounded-lg p-6 shadow-md hover:shadow-violet-500/30 transition">
+        <h3 class="text-2xl font-semibold text-violet-400 mb-3">Electronics & Technical Support</h3>
+        <p class="text-gray-300">
+          Our expert technicians provide custom electronics repair, prototyping, and support services to individuals, startups, and enterprises alike.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-16 text-center max-w-3xl mx-auto">
+      <p class="text-xl text-white font-medium mb-4">
+        We reinvest <span class="text-violet-400 font-bold">50% of our profits</span> into research and development for the OpenVoice Foundation.
+      </p>
+      <p class="text-gray-300 text-lg mb-8">
+        Every project we take on fuels our mission to build inclusive assistive technologies that empower the deaf and hard-of-hearing community.
+      </p>
+      <a href="#contact" class="inline-block bg-violet-700 hover:bg-violet-600 text-white font-semibold text-lg py-3 px-8 rounded-md transition duration-300 shadow-lg">
+        Partner with Us
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+
   <!-- Footer -->
   <footer class="bg-gray-900 text-center py-6 mt-16 text-white text-sm">
     <p>© 2025 OpenVoice Foundation. All rights reserved.</p>
     <p><a href="#" class="hover:text-violet-400">Privacy Policy</a> | <a href="#" class="hover:text-violet-400">Terms of Service</a></p>
   </footer>
-
- <!-- Terms Popup -->
- <div id="termsModal" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-70 z-50 hidden">
-  <div class="bg-white dark:bg-gray-900 text-black dark:text-white rounded-2xl shadow-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-    <h2 class="text-2xl font-semibold text-violet-800 dark:text-violet-300 mb-4">Terms and Conditions</h2>
-    <!-- Terms content here -->
-    <div class="flex justify-end space-x-4 mt-6">
-      <button id="acceptTerms" class="bg-violet-700 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">I Accept</button>
-      <button id="declineTerms" class="bg-gray-300 text-gray-800 px-6 py-3 rounded-lg dark:bg-gray-600 dark:text-white">Decline</button>
-    </div>
-  </div>
-</div>
 
 <!-- EmailJS Script -->
 <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -185,3 +355,4 @@
 
 </body>
 </html>
+
