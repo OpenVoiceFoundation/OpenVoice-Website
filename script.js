@@ -1,36 +1,20 @@
-// Theme Toggle
-const themeToggle = document.getElementById("themeToggle");
-themeToggle.addEventListener("click", () => {
-  document.documentElement.classList.toggle("dark");
-  document.body.classList.toggle("bg-gray-900");
-  document.body.classList.toggle("bg-white");
-  document.body.classList.toggle("text-white");
-  document.body.classList.toggle("text-gray-900");
-});
-
-// Modal Logic
-window.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("termsModal");
-  const acceptBtn = document.getElementById("acceptTerms");
-  const declineBtn = document.getElementById("declineTerms");
-
-  if (!localStorage.getItem("termsAccepted")) {
-    modal.style.display = "flex";
+window.addEventListener('DOMContentLoaded', () => {
+  // Theme Toggle
+  const themeToggle = document.getElementById("themeToggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+      document.body.classList.toggle("bg-gray-900");
+      document.body.classList.toggle("bg-white");
+      document.body.classList.toggle("text-white");
+      document.body.classList.toggle("text-gray-900");
+    });
   }
 
-  acceptBtn.addEventListener("click", () => {
-    localStorage.setItem("termsAccepted", "true");
-    modal.style.display = "none";
-  });
-
-  declineBtn.addEventListener("click", () => {
-    alert("You must accept the terms to continue using the site.");
-  });
-
-  // Charts
   const progressCtx = document.getElementById("progressChart")?.getContext("2d");
   const costCtx = document.getElementById("costChart")?.getContext("2d");
   const distributionCtx = document.getElementById("distributionChart")?.getContext("2d");
+
   const productionGoalCtx = document.getElementById("productionGoalChart")?.getContext("2d");
 
   if (progressCtx) {
@@ -80,7 +64,6 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-  
 
   if (productionGoalCtx) {
     new Chart(productionGoalCtx, {
@@ -105,49 +88,57 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-  
-  // Production Goal vs Actual Chart
-  if (productionChart) {
-    new Chart(productionChart, {
-      type: "doughnut",
+
+  if (distributionCtx) {
+    new Chart(distributionCtx, {
+      type: 'bar', // or 'doughnut' or any type you prefer
       data: {
-        labels: ["Produced", "Goal Remaining"],
+        labels: ['Device A', 'Device B', 'Device C', 'Device D'], // update as needed
         datasets: [{
-          data: [0, 400],  // Currently, 0 units produced out of the goal of 400
-          backgroundColor: ["#3b82f6", "#9ca3af"],
-          hoverOffset: 4
+          label: 'Device Distribution',
+          data: [30, 20, 25, 25], // example data - replace with your actual values
+          backgroundColor: ['#f87171', '#34d399', '#3b82f6', '#fbbf24']
         }]
       },
       options: {
         responsive: true,
         plugins: {
-          legend: { position: "bottom", labels: { color: "#fff" } }
+          legend: { position: 'bottom', labels: { color: '#fff' } }
         },
-        animation: {
-          animateRotate: true,
-          animateScale: true
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { color: '#fff' }
+          },
+          x: {
+            ticks: { color: '#fff' }
+          }
         }
       }
     });
   }
+  
+
+  // Form Submission (EmailJS)
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    var form = event.target;
+
+    emailjs.sendForm('service_jum20ja', 'template_4unn1ck', form)
+      .then(function(response) {
+        alert("Thank you for contacting us! We'll get back to you shortly.");
+      }, function(error) {
+        alert("Failed to send the message. Please try again.");
+      });
+
+    form.reset();
+    return false;
+  }
+
+  // Attach form submit event if form exists
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", handleSubmit);
+  }
 });
-
-// Form Submission (EmailJS)
-function handleSubmit(event) {
-  event.preventDefault();
-
-  // Get the form element directly
-  var form = event.target;
-
-  // Send the form data via EmailJS
-  emailjs.sendForm('service_jum20ja', 'template_4unn1ck', form)
-    .then(function(response) {
-      alert("Thank you for contacting us! We'll get back to you shortly.");
-    }, function(error) {
-      alert("Failed to send the message. Please try again.");
-    });
-
-  // Reset the form after submission
-  form.reset();
-  return false;
-}
