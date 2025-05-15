@@ -30,6 +30,8 @@ window.addEventListener("DOMContentLoaded", () => {
   // Charts
   const progressCtx = document.getElementById("progressChart")?.getContext("2d");
   const costCtx = document.getElementById("costChart")?.getContext("2d");
+  const distributionCtx = document.getElementById("distributionChart")?.getContext("2d");
+  const productionGoalCtx = document.getElementById("productionGoalChart")?.getContext("2d");
 
   if (progressCtx) {
     new Chart(progressCtx, {
@@ -55,8 +57,8 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (costCtx) {
-    new Chart(costCtx, {
+  if (cost) {
+    new Chart(cost, {
       type: "doughnut",
       data: {
         labels: ["Hardware", "Assembly", "Shipping", "Other"],
@@ -78,25 +80,74 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // Device Distribution Chart
+  if (distributionCtx) {
+    new Chart(distributionCtx, {
+      type: "doughnut",
+      data: {
+        labels: ["Distributed", "Undistributed"],
+        datasets: [{
+          data: [0, 100],
+          backgroundColor: ["#10b981", "#374151"],
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "bottom", labels: { color: "#fff" } }
+        },
+        animation: {
+          animateRotate: true,
+          animateScale: true
+        }
+      }
+    });
+  }
+
+  // Production Goal vs Actual Chart
+  if (productionChart) {
+    new Chart(productionChart, {
+      type: "doughnut",
+      data: {
+        labels: ["Produced", "Goal Remaining"],
+        datasets: [{
+          data: [0, 400],  // Currently, 0 units produced out of the goal of 400
+          backgroundColor: ["#3b82f6", "#9ca3af"],
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "bottom", labels: { color: "#fff" } }
+        },
+        animation: {
+          animateRotate: true,
+          animateScale: true
+        }
+      }
+    });
+  }
 });
 
 // Form Submission (EmailJS)
 function handleSubmit(event) {
-    event.preventDefault();
-  
-    // Get the form element directly
-    var form = event.target;
-  
-    // Send the form data via EmailJS
-    emailjs.sendForm('service_jum20ja', 'template_4unn1ck', form)
-      .then(function(response) {
-        alert("Thank you for contacting us! We'll get back to you shortly.");
-      }, function(error) {
-        alert("Failed to send the message. Please try again.");
-      });
-  
-    // Reset the form after submission
-    form.reset();
-    return false;
-  }
-  
+  event.preventDefault();
+
+  // Get the form element directly
+  var form = event.target;
+
+  // Send the form data via EmailJS
+  emailjs.sendForm('service_jum20ja', 'template_4unn1ck', form)
+    .then(function(response) {
+      alert("Thank you for contacting us! We'll get back to you shortly.");
+    }, function(error) {
+      alert("Failed to send the message. Please try again.");
+    });
+
+  // Reset the form after submission
+  form.reset();
+  return false;
+}
