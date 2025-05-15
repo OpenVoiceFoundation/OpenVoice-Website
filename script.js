@@ -125,7 +125,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     var form = event.target;
 
-    emailjs.sendForm('service_5k6he59', 'template_4unn1ck', form)
+    emailjs.sendForm('service_5k6he59', 'template_esy9qcj', form)
       .then(function(response) {
         alert("Thank you for contacting us! We'll get back to you shortly.");
       }, function(error) {
