@@ -57,8 +57,8 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (cost) {
-    new Chart(cost, {
+  if (costCtx) {
+    new Chart(costCtx, {
       type: "doughnut",
       data: {
         labels: ["Hardware", "Assembly", "Shipping", "Other"],
@@ -80,16 +80,16 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+  
 
-  // Device Distribution Chart
-  if (distributionCtx) {
-    new Chart(distributionCtx, {
+  if (productionGoalCtx) {
+    new Chart(productionGoalCtx, {
       type: "doughnut",
       data: {
-        labels: ["Distributed", "Undistributed"],
+        labels: ["Produced", "Goal Remaining"],
         datasets: [{
-          data: [0, 100],
-          backgroundColor: ["#10b981", "#374151"],
+          data: [0, 400],
+          backgroundColor: ["#3b82f6", "#9ca3af"],
           hoverOffset: 4
         }]
       },
@@ -105,7 +105,7 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
+  
   // Production Goal vs Actual Chart
   if (productionChart) {
     new Chart(productionChart, {
